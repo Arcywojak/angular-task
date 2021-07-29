@@ -1,1 +1,19 @@
-<p>recipe-list works!</p>
+<mat-card class="recipe-list-container">
+    <div class="create-new-item-button-wrapper">
+        <button mat-raised-button color="primary">
+            Create new recipe
+        </button>
+    </div>
+
+    <ng-container *ngIf="recipes.length > 0">
+        <app-recipe-list-item *ngFor="let recipe of recipes" [recipe]="recipe">
+        
+        </app-recipe-list-item>
+    </ng-container>
+    <ng-container *ngIf="recipes.length <= 0">
+        <h1>You have no recipes at this moment</h1>
+    </ng-container>
+    
+    
+    
+</mat-card>

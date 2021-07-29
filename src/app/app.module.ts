@@ -6,6 +6,7 @@ import { RecipesMaintainerComponent } from './features/recipes-maintainer/recipe
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthorInfoDialogComponent } from './features/navbar/author-info-dialog/author-info-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatCardModule} from '@angular/material/card';
 import { RecipesMaintainerModule } from './features/recipes-maintainer/recipes-maintainer.module';
 
 @NgModule({
@@ -19,6 +20,7 @@ import { RecipesMaintainerModule } from './features/recipes-maintainer/recipes-m
     BrowserModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    MatCardModule,
     RecipesMaintainerModule
   ],
   providers: [],

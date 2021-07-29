@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-recipe-crud',
-  templateUrl: './recipe-crud.component.html',
-  styleUrls: ['./recipe-crud.component.scss'],
+  selector: 'app-view-recipe',
+  templateUrl: './view-recipe.component.html',
+  styleUrls: ['./view-recipe.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RecipeCrudComponent implements OnInit {
+export class ViewRecipeComponent implements OnInit {
 
   constructor() { }
 

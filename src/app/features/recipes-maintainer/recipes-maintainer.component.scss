@@ -1,0 +1,9 @@
+.recipe-maintainer-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: calc(40% - 6px) calc(60% - 6px);
+    gap: 12px;
+    margin-top: 24px;
+}
