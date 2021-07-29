@@ -1,0 +1,14 @@
+<mat-card *ngIf="recipe" class="recipe-list-item">
+    <div class="recipe-list-item__child name">
+        <h3>{{recipe.name}}</h3>
+    </div>
+
+    <div class="recipe-list-item__child buttons">
+        <button mat-raised-button color="primary">
+            Edit
+        </button>
+        <button mat-raised-button color="accent">
+            delete
+        </button>
+    </div>
+</mat-card>

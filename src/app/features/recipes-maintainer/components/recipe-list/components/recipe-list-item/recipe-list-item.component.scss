@@ -1,0 +1,25 @@
+@import "../../../../../../styles/variables.scss";
+
+.recipe-list-item {
+    width: 100%;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background-color: $veryLightGray;
+    cursor: pointer;
+
+    &__child {
+        &.buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        &.name {
+            h3 {
+                margin: 0;
+            }
+        }
+    }
+}
