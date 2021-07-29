@@ -1,0 +1,27 @@
+@import "../../styles/variables.scss";
+
+.navbar {
+    background-color: $primary;
+    color: white;
+    height: $headerHeight;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 4vw;
+
+    h2 {
+        margin: 0;
+        font-weight: 400;
+    }
+}
+
+.icon-button {
+    background-color: lighten($primary, 10%);
+    height: 39px;
+    width: 39px;
+    border: 1px solid daren($primary, 20%);
+    border-radius: 50%;
+    cursor: pointer;
+    color: white;
+    font-size: 24px;
+}
