@@ -1,0 +1,71 @@
+<form (ngSubmit)="onSubmit()" class="manipulate-recipe-form flex">
+    <h1 *ngIf="fillFormType == 0">Editing recipe</h1>
+    <h1 *ngIf="fillFormType == 1">Creating recipe</h1>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input type="text" matInput placeholder="Ex. Pizza" [formControl]="nameFormControl">
+        <mat-error *ngIf="hasError(nameFormControl)">
+            {{getError(nameFormControl)}}
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Preparation in minutes</mat-label>
+        <input type="number" matInput [formControl]="preparationInMinutesFormControl">
+        <mat-error *ngIf="hasError(preparationInMinutesFormControl)">
+            {{getError(preparationInMinutesFormControl)}}
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput [formControl]="descriptionFormControl"
+                  cdkTextareaAutosize>
+        </textarea>
+        <mat-error *ngIf="hasError(descriptionFormControl)">
+            {{getError(descriptionFormControl)}}
+        </mat-error>
+    </mat-form-field>
+
+    <fieldset class="fieldset flex">
+        <legend>Ingredients</legend>
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input type="text" matInput [formControl]="ingredientNameFormControl">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Quantity</mat-label>
+            <input type="text" matInput [formControl]="ingredientQuantityFormControl">
+        </mat-form-field>
+
+        <button [disabled]="ingredientForm.invalid" mat-raised-button color="primary" type="button" (click)="addIngredient()">
+            Add ingredient
+        </button>
+
+        <div class="ingredient-list">
+            <ng-container *ngIf="ingredientsFormControl.value?.length <= 0">
+                <p class="no-ingredients-message">There are no ingredients at this momennt</p>
+            </ng-container>
+            <mat-chip-list *ngIf="ingredientsFormControl.value?.length > 0">
+                <mat-chip (click)="removeIngredient(ingredient)" class="ingredient" *ngFor="let ingredient of ingredientsFormControl.value">
+                    {{ingredient.name}}, {{ingredient.quantity}}
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+    </fieldset>
+
+    <div class="buttons">
+        <button  mat-raised-button color="primary">
+            <ng-container *ngIf="fillFormType == 0">
+                Edit
+            </ng-container>
+            <ng-container *ngIf="fillFormType == 1">
+                Create
+            </ng-container>
+        </button>
+        <button *ngIf="fillFormType == 0" (click)="openDeleteDialog()" type="button" mat-raised-button color="warn">
+            delete
+        </button>
+    </div>
+</form>

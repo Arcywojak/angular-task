@@ -8,6 +8,7 @@ import { AuthorInfoDialogComponent } from './features/navbar/author-info-dialog/
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import { RecipesMaintainerModule } from './features/recipes-maintainer/recipes-maintainer.module';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RecipesMaintainerModule } from './features/recipes-maintainer/recipes-m
     BrowserAnimationsModule,
     MatDialogModule,
     MatCardModule,
+    MatButtonModule,
     RecipesMaintainerModule
   ],
   providers: [],

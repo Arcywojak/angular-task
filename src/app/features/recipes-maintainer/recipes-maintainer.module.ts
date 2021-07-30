@@ -12,6 +12,10 @@ import { WaitRecipeComponent } from './components/recipe-crud/components/wait-re
 import { RecipeCrudRoutingModule } from './components/recipe-crud/recipe-crud.routing';
 import { ConfirmActionDialogComponent } from './components/confirm-action-dialog/confirm-action-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ManipulateRecipeComponent } from './components/recipe-crud/components/manipulate-recipe/manipulate-recipe.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -24,14 +28,18 @@ import { HttpClientModule } from '@angular/common/http';
     EditRecipeComponent,
     ViewRecipeComponent,
     WaitRecipeComponent,
-    ConfirmActionDialogComponent
+    ConfirmActionDialogComponent,
+    ManipulateRecipeComponent
   ],
   imports: [
     CommonModule,
     MatCardModule,
     MatButtonModule,
     HttpClientModule,
-    RecipeCrudRoutingModule
+    RecipeCrudRoutingModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatChipsModule
   ],
   exports: [
     RecipeListComponent,
