@@ -5,12 +5,12 @@
         </button>
     </div>
 
-    <ng-container *ngIf="recipes.length > 0">
-        <app-recipe-list-item *ngFor="let recipe of recipes" [recipe]="recipe">
+    <ng-container *ngIf="recipeList.length > 0">
+        <app-recipe-list-item *ngFor="let recipe of recipeList" [recipe]="recipe">
         
         </app-recipe-list-item>
     </ng-container>
-    <ng-container *ngIf="recipes.length <= 0">
+    <ng-container *ngIf="recipeList.length <= 0">
         <h1>You have no recipes at this moment</h1>
     </ng-container>
     

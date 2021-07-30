@@ -1,5 +1,5 @@
 <div class="recipe-maintainer-container">
-    <app-recipe-list>
+    <app-recipe-list [recipeList]="($recipes | async) || []">
 
     </app-recipe-list>
     

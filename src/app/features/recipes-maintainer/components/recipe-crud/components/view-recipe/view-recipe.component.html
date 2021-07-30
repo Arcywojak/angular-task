@@ -1,1 +1,26 @@
-<p>view-recipe works!</p>
+<div *ngIf="recipe" class="view-recipe">
+    <h2>Details of the recipe:</h2>
+    <div class="recipe-info">
+        <p>
+            <b>Name: &nbsp;</b> <i>{{recipe.name}}</i>
+        </p>
+    </div>
+    <div class="recipe-info">
+        <p>
+            <b>Preparation time: &nbsp;</b> <i>{{recipe.preparationTimeInMinutes | timeFromMinutes}}</i>
+        </p>
+    </div>
+    <div class="recipe-info">
+        <p>
+            <b>Description: &nbsp;</b> <i>{{recipe.description}}</i>
+        </p>
+    </div>
+    <div class="recipe-info">
+        <p>
+            <b>Ingredients:</b> <br><br>
+            <i *ngFor="let ingredient of recipe.ingredients">
+                -&nbsp; {{ingredient.name}}, {{ingredient.quantity}} <br>
+            </i>
+        </p>
+    </div>
+</div>

@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Ingredient } from '../../models/ingredient.model';
 import { Recipe } from '../../models/recipe.model';
 import { RecipeService } from '../../services/recipe.service';
 
@@ -10,38 +11,14 @@ import { RecipeService } from '../../services/recipe.service';
   styleUrls: ['./recipe-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RecipeListComponent implements OnInit {
+export class RecipeListComponent implements OnChanges {
 
- // recipes: Observable<Recipe[]>;
-
-  recipes: Recipe[] = [
-    {
-      _id:"123",
-      name: "recipe1",
-      description: "description of recipe2",
-      preparationTimeInMinutes: 25,
-      ingredients: [{_id:"1",name:"ogred1", quantity:"15"},{_id:"2",name:"ogred1", quantity:"15"},{_id:"3",name:"ogred1", quantity:"15"}]
-    },
-    {
-      _id:"123",
-      name: "recipe1",
-      description: "description of recipe2",
-      preparationTimeInMinutes: 25,
-      ingredients: [{_id:"1",name:"ogred1", quantity:"15"},{_id:"2",name:"ogred1", quantity:"15"},{_id:"3",name:"ogred1", quantity:"15"}]
-    },
-    {
-      _id:"123",
-      name: "recipe1",
-      description: "description of recipe2",
-      preparationTimeInMinutes: 25,
-      ingredients: [{_id:"1",name:"ogred1", quantity:"15"},{_id:"2",name:"ogred1", quantity:"15"},{_id:"3",name:"ogred1", quantity:"15"}]
-    }
-  ]
+  @Input() recipeList: Recipe[] = [];
 
   constructor(private recipeService: RecipeService, private router: Router) { }
 
-  ngOnInit(): void {
-    //this.recipeService.readAll().subscribe(data => console.log(data))
+  ngOnChanges(data: any): void {
+    console.log(data)
   }
 
   navigateToCreate() {

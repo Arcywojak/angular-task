@@ -3,26 +3,6 @@
     flex-direction: column;
 }
 
-.fieldset{
-    & button {
-        max-width: 150px;
-    }
-}
-
-.no-ingredients-message {
-    font-style: italic;
-    font-weight: 500;
-}
-
-.ingredient:hover {
-    text-decoration: line-through;
-    cursor: pointer;
-}
-
-.ingredient-list {
-    margin: 12px;
-}
-
 .buttons {
     display: flex;
     gap: 12px;

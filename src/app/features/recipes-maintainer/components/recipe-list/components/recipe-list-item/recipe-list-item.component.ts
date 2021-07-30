@@ -6,6 +6,7 @@ import { ConfirmActionDialogComponent } from '../../../confirm-action-dialog/con
 import { switchMap } from 'rxjs/operators'
 import { RecipeService } from 'src/app/features/recipes-maintainer/services/recipe.service';
 import { EMPTY } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-recipe-list-item',
@@ -16,7 +17,11 @@ export class RecipeListItemComponent {
 
   @Input() recipe: Recipe | null = null;
 
-  constructor(private router: Router, public dialog: MatDialog, private recipeService: RecipeService) { }
+  constructor(
+    private router: Router,
+    public dialog: MatDialog, 
+    private recipeService: RecipeService, 
+    private snackBar: MatSnackBar) { }
 
   navigateTo(event: MouseEvent, routeParam: string) {
     //by adding stop propagation we contain element from routing to view (If we want to route to edit)
@@ -39,13 +44,17 @@ export class RecipeListItemComponent {
     
     dialogRef.afterClosed().pipe(
       switchMap(shouldActionBeExecuted => {
-      //  if(shouldActionBeExecuted) {
-      //    return this.recipeService.delete(this.recipe?._id || "");
-      //  }
+        if(shouldActionBeExecuted) {
+          return this.recipeService.delete(this.recipe?._id || "");
+        }
 
         return EMPTY;
       })
-    ).subscribe()
+    ).subscribe(res => {
+      this.snackBar.open("Recipe deleted", "SUCCESS", {duration: 2000})
+    }, err => {
+      this.snackBar.open("Something went wrong!", "UPS", {duration: 2000})
+    })
 
   }
 

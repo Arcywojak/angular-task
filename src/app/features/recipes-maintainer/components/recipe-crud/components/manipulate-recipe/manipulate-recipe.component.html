@@ -6,7 +6,7 @@
         <mat-label>Name</mat-label>
         <input type="text" matInput placeholder="Ex. Pizza" [formControl]="nameFormControl">
         <mat-error *ngIf="hasError(nameFormControl)">
-            {{getError(nameFormControl)}}
+            {{getFormControlError(nameFormControl)}}
         </mat-error>
     </mat-form-field>
 
@@ -14,7 +14,7 @@
         <mat-label>Preparation in minutes</mat-label>
         <input type="number" matInput [formControl]="preparationInMinutesFormControl">
         <mat-error *ngIf="hasError(preparationInMinutesFormControl)">
-            {{getError(preparationInMinutesFormControl)}}
+            {{getFormControlError(preparationInMinutesFormControl)}}
         </mat-error>
     </mat-form-field>
 
@@ -24,39 +24,20 @@
                   cdkTextareaAutosize>
         </textarea>
         <mat-error *ngIf="hasError(descriptionFormControl)">
-            {{getError(descriptionFormControl)}}
+            {{getFormControlError(descriptionFormControl)}}
         </mat-error>
     </mat-form-field>
 
-    <fieldset class="fieldset flex">
-        <legend>Ingredients</legend>
-        <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input type="text" matInput [formControl]="ingredientNameFormControl">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Quantity</mat-label>
-            <input type="text" matInput [formControl]="ingredientQuantityFormControl">
-        </mat-form-field>
+    <app-ingredient-form [ingredients]="recipe?.ingredients || []" (updatedIngredients)="loadNewIngredients($event)">
 
-        <button [disabled]="ingredientForm.invalid" mat-raised-button color="primary" type="button" (click)="addIngredient()">
-            Add ingredient
-        </button>
+    </app-ingredient-form>
 
-        <div class="ingredient-list">
-            <ng-container *ngIf="ingredientsFormControl.value?.length <= 0">
-                <p class="no-ingredients-message">There are no ingredients at this momennt</p>
-            </ng-container>
-            <mat-chip-list *ngIf="ingredientsFormControl.value?.length > 0">
-                <mat-chip (click)="removeIngredient(ingredient)" class="ingredient" *ngFor="let ingredient of ingredientsFormControl.value">
-                    {{ingredient.name}}, {{ingredient.quantity}}
-                </mat-chip>
-            </mat-chip-list>
-        </div>
-    </fieldset>
+    <mat-error *ngIf="notEnoughIngredientsMessage">
+        {{notEnoughIngredientsMessage}}
+    </mat-error>
 
     <div class="buttons">
-        <button  mat-raised-button color="primary">
+        <button [disabled]="recipeForm.invalid"  mat-raised-button color="primary">
             <ng-container *ngIf="fillFormType == 0">
                 Edit
             </ng-container>

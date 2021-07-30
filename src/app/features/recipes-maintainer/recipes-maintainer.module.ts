@@ -13,9 +13,12 @@ import { RecipeCrudRoutingModule } from './components/recipe-crud/recipe-crud.ro
 import { ConfirmActionDialogComponent } from './components/confirm-action-dialog/confirm-action-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ManipulateRecipeComponent } from './components/recipe-crud/components/manipulate-recipe/manipulate-recipe.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { IngredientFormComponent } from './components/recipe-crud/components/manipulate-recipe/components/ingredient-form/ingredient-form.component';
+import { TimeFromMinutesPipe } from './pipes/time-from-minutes.pipe';
 
 
 
@@ -29,7 +32,9 @@ import {MatChipsModule} from '@angular/material/chips';
     ViewRecipeComponent,
     WaitRecipeComponent,
     ConfirmActionDialogComponent,
-    ManipulateRecipeComponent
+    ManipulateRecipeComponent,
+    IngredientFormComponent,
+    TimeFromMinutesPipe
   ],
   imports: [
     CommonModule,
@@ -38,8 +43,10 @@ import {MatChipsModule} from '@angular/material/chips';
     HttpClientModule,
     RecipeCrudRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     MatInputModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSnackBarModule
   ],
   exports: [
     RecipeListComponent,

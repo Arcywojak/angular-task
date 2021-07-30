@@ -1,0 +1,26 @@
+<fieldset class="fieldset flex">
+    <legend>Ingredients</legend>
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input type="text" matInput [formControl]="ingredientNameFormControl">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Quantity</mat-label>
+        <input type="text" matInput [formControl]="ingredientQuantityFormControl">
+    </mat-form-field>
+
+    <button [disabled]="ingredientForm.invalid" mat-raised-button color="primary" type="button" (click)="addIngredient()">
+        Add ingredient
+    </button>
+
+    <div class="ingredient-list">
+        <ng-container *ngIf="arrayOfIngredients.length <= 0">
+            <p class="no-ingredients-message">There are no ingredients at this momennt</p>
+        </ng-container>
+        <mat-chip-list *ngIf="arrayOfIngredients.length > 0">
+            <mat-chip (click)="removeIngredient(ingredient)" class="ingredient" *ngFor="let ingredient of arrayOfIngredients">
+                {{ingredient.name}}, {{ingredient.quantity}}
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+</fieldset>
