@@ -1,13 +1,13 @@
-<mat-card *ngIf="recipe" class="recipe-list-item">
+<mat-card *ngIf="recipe" class="recipe-list-item" (click)="navigateTo($event, 'view')">
     <div class="recipe-list-item__child name">
         <h3>{{recipe.name}}</h3>
     </div>
 
     <div class="recipe-list-item__child buttons">
-        <button mat-raised-button color="primary">
+        <button (click)="navigateTo($event, 'edit')" mat-raised-button color="primary">
             Edit
         </button>
-        <button mat-raised-button color="accent">
+        <button mat-raised-button color="accent" (click)="openDeleteDialog($event)">
             delete
         </button>
     </div>

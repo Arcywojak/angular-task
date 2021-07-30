@@ -10,6 +10,8 @@ import { EditRecipeComponent } from './components/recipe-crud/components/edit-re
 import { ViewRecipeComponent } from './components/recipe-crud/components/view-recipe/view-recipe.component';
 import { WaitRecipeComponent } from './components/recipe-crud/components/wait-recipe/wait-recipe.component';
 import { RecipeCrudRoutingModule } from './components/recipe-crud/recipe-crud.routing';
+import { ConfirmActionDialogComponent } from './components/confirm-action-dialog/confirm-action-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -21,12 +23,14 @@ import { RecipeCrudRoutingModule } from './components/recipe-crud/recipe-crud.ro
     CreateRecipeComponent,
     EditRecipeComponent,
     ViewRecipeComponent,
-    WaitRecipeComponent
+    WaitRecipeComponent,
+    ConfirmActionDialogComponent
   ],
   imports: [
     CommonModule,
     MatCardModule,
     MatButtonModule,
+    HttpClientModule,
     RecipeCrudRoutingModule
   ],
   exports: [

@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Recipe } from '../../models/recipe.model';
+import { RecipeService } from '../../services/recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -8,6 +11,8 @@ import { Recipe } from '../../models/recipe.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecipeListComponent implements OnInit {
+
+ // recipes: Observable<Recipe[]>;
 
   recipes: Recipe[] = [
     {
@@ -33,9 +38,14 @@ export class RecipeListComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(private recipeService: RecipeService, private router: Router) { }
 
   ngOnInit(): void {
+    //this.recipeService.readAll().subscribe(data => console.log(data))
+  }
+
+  navigateToCreate() {
+    this.router.navigate(["/create"])
   }
 
 }

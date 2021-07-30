@@ -8,12 +8,9 @@ import { AuthorInfoDialogComponent } from './author-info-dialog/author-info-dial
   styleUrls: ['./navbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   constructor(public dialog: MatDialog) { }
-
-  ngOnInit(): void {
-  }
 
   openAuthorInfoDialog() {
     this.dialog.open(AuthorInfoDialogComponent);

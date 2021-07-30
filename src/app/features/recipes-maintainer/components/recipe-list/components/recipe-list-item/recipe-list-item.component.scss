@@ -9,6 +9,7 @@
     gap: 12px;
     background-color: $veryLightGray;
     cursor: pointer;
+    transition: background .3s ease-in-out;
 
     &__child {
         &.buttons {
@@ -21,5 +22,9 @@
                 margin: 0;
             }
         }
+    }
+
+    &:hover {
+        background-color: darken($veryLightGray, 7%);
     }
 }
