@@ -1,7 +1,18 @@
 <div class="recipe-maintainer-container">
-    <app-recipe-list [recipeList]="($recipes | async) || []">
-
-    </app-recipe-list>
+    <mat-card>
+        <app-filter-data-form
+        [data]="recipes"
+        [dataName]="'recipes'"
+        [filterProperty]="'name'"
+        (filteredDataEmitter)="setFilteredData($event)">
+        
+        </app-filter-data-form>
+    
+        <app-recipe-list  [recipeList]="filteredRecipes || []" (refreshMaintainer)="refreshData()">
+    
+        </app-recipe-list>
+    </mat-card>
+    
     
     <app-recipe-crud>
     

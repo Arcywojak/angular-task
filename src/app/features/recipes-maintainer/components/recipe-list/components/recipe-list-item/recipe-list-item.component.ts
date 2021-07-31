@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Recipe } from 'src/app/features/recipes-maintainer/models/recipe.model';
@@ -17,6 +17,9 @@ export class RecipeListItemComponent {
 
   @Input() recipe: Recipe | null = null;
 
+  @Output() refreshList = new EventEmitter<string>();
+
+
   constructor(
     private router: Router,
     public dialog: MatDialog, 
@@ -32,7 +35,7 @@ export class RecipeListItemComponent {
   openDeleteDialog(event: MouseEvent) {
     //by adding stop propagation we contain element from routing to view (If we want to delete item)
     event.stopPropagation();
-
+  
     const message = `Are you sure to delete recipe named ${this.recipe?.name}?`
 
     const dialogRef = this.dialog.open(ConfirmActionDialogComponent, {
@@ -52,10 +55,19 @@ export class RecipeListItemComponent {
       })
     ).subscribe(res => {
       this.snackBar.open("Recipe deleted", "SUCCESS", {duration: 2000})
+      this.refreshParent(this.recipe?._id || "");
+
     }, err => {
       this.snackBar.open("Something went wrong!", "UPS", {duration: 2000})
     })
 
   }
+
+  refreshParent(deletedItemId: string) {
+    console.log("list-item refreshed")
+    this.refreshList.emit(deletedItemId);
+  }
+  
+
 
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-wait-recipe',
@@ -6,11 +6,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./wait-recipe.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WaitRecipeComponent implements OnInit {
+export class WaitRecipeComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

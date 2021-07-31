@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Ingredient } from 'src/app/features/recipes-maintainer/models/ingredient.model';
 import { EventEmitter } from '@angular/core';
@@ -9,7 +9,7 @@ import { EventEmitter } from '@angular/core';
   styleUrls: ['./ingredient-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IngredientFormComponent implements OnInit {
+export class IngredientFormComponent {
 
   arrayOfIngredients: Ingredient[] = [];
 
@@ -30,9 +30,6 @@ export class IngredientFormComponent implements OnInit {
   })
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   addIngredient() {
     const ingredient = {

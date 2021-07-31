@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-recipe-crud',
@@ -6,11 +6,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./recipe-crud.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RecipeCrudComponent implements OnInit {
+export class RecipeCrudComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

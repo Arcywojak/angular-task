@@ -9,6 +9,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import { RecipesMaintainerModule } from './features/recipes-maintainer/recipes-maintainer.module';
 import { MatButtonModule } from '@angular/material/button';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { KeyAttacherInterceptor } from './interceptors/key-attacher.interceptor';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app.routing';
 
 @NgModule({
   declarations: [
@@ -23,9 +27,13 @@ import { MatButtonModule } from '@angular/material/button';
     MatDialogModule,
     MatCardModule,
     MatButtonModule,
-    RecipesMaintainerModule
+    RecipesMaintainerModule,
+    AppRoutingModule,
+    RouterModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: KeyAttacherInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     AuthorInfoDialogComponent

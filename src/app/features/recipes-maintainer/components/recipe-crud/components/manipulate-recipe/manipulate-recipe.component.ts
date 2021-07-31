@@ -41,6 +41,7 @@ export class ManipulateRecipeComponent implements OnChanges {
     private snackBar: MatSnackBar) { }
 
   ngOnChanges() {
+    console.log("UPDATED")
     if(this.fillFormType === ManipulateRecipeFormType.EDIT && this.recipe != null) {
       this.setValuesForRecipeForm(this.recipe);
     }
@@ -58,6 +59,12 @@ export class ManipulateRecipeComponent implements OnChanges {
   }
 
   getFormControlError(formControl: FormControl): string {
+    if(formControl.pristine) {
+      //we dont want to show error on untouched formControl 
+      //it also prevent showing errors when the form is reset
+      return "";
+    }
+
     if(formControl.hasError('required')) {
       return "The field is required";
     }
@@ -76,7 +83,8 @@ export class ManipulateRecipeComponent implements OnChanges {
 
   onSubmit() {
     if(this.ingredientsFormControl.value.length < 2) {
-      this.notEnoughIngredientsMessage = "At least 2 ingredients are required!"
+      this.notEnoughIngredientsMessage = "At least 2 ingredients are required!";
+      return;
     }
 
     const recipe = {
@@ -97,14 +105,20 @@ export class ManipulateRecipeComponent implements OnChanges {
   createRecipe(recipe: Recipe) {
 
     this.recipeService.create(recipe).subscribe(res => { 
-      this.snackBar.open("Recipe has been created", "SUCCESS", {duration:2000})
+      this.snackBar.open("Recipe has been created", "SUCCESS", {duration:2000});
+      this.resetFormValues();
     }, err => {
       this.snackBar.open("Something went wrong!", "UPS", {duration:2000})
     })
   }
 
+  resetFormValues() {
+    this.recipeForm.reset();
+    this.ingredientsFormControl.setValue([]);
+  }
+
   updateRecipe(recipe: Recipe) {
-    this.recipeService.update(recipe).subscribe(res => {
+    this.recipeService.update(recipe, this.recipe?._id || "").subscribe(res => {
       this.snackBar.open("Recipe has been updated", "SUCCESS", {duration:2000})
     }, err => {
       this.snackBar.open("Something went wrong!", "UPS", {duration:2000})
@@ -113,6 +127,10 @@ export class ManipulateRecipeComponent implements OnChanges {
 
   loadNewIngredients($event: Ingredient[]) {
     this.ingredientsFormControl.setValue($event);
+  }
+
+  sendNewDataToParent() {
+    return this.recipeService.readAll()
   }
 
   openDeleteDialog() {

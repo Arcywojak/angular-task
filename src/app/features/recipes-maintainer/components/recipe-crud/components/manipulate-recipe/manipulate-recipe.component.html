@@ -1,6 +1,6 @@
 <form (ngSubmit)="onSubmit()" class="manipulate-recipe-form flex">
-    <h1 *ngIf="fillFormType == 0">Editing recipe</h1>
-    <h1 *ngIf="fillFormType == 1">Creating recipe</h1>
+    <h1 *ngIf="fillFormType === 0">Editing recipe</h1>
+    <h1 *ngIf="fillFormType === 1">Creating recipe</h1>
 
     <mat-form-field class="example-full-width">
         <mat-label>Name</mat-label>
@@ -38,14 +38,14 @@
 
     <div class="buttons">
         <button [disabled]="recipeForm.invalid"  mat-raised-button color="primary">
-            <ng-container *ngIf="fillFormType == 0">
+            <ng-container *ngIf="fillFormType === 0">
                 Edit
             </ng-container>
-            <ng-container *ngIf="fillFormType == 1">
+            <ng-container *ngIf="fillFormType === 1">
                 Create
             </ng-container>
         </button>
-        <button *ngIf="fillFormType == 0" (click)="openDeleteDialog()" type="button" mat-raised-button color="warn">
+        <button *ngIf="fillFormType === 0" (click)="openDeleteDialog()" type="button" mat-raised-button color="warn">
             delete
         </button>
     </div>

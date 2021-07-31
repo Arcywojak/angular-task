@@ -19,6 +19,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { IngredientFormComponent } from './components/recipe-crud/components/manipulate-recipe/components/ingredient-form/ingredient-form.component';
 import { TimeFromMinutesPipe } from './pipes/time-from-minutes.pipe';
+import { FilterDataFormComponent } from './components/filter-data-form/filter-data-form.component';
 
 
 
@@ -34,7 +35,8 @@ import { TimeFromMinutesPipe } from './pipes/time-from-minutes.pipe';
     ConfirmActionDialogComponent,
     ManipulateRecipeComponent,
     IngredientFormComponent,
-    TimeFromMinutesPipe
+    TimeFromMinutesPipe,
+    FilterDataFormComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,8 @@ import { TimeFromMinutesPipe } from './pipes/time-from-minutes.pipe';
   ],
   exports: [
     RecipeListComponent,
-    RecipeCrudComponent
+    RecipeCrudComponent,
+    FilterDataFormComponent
   ]
 })
 export class RecipesMaintainerModule { }

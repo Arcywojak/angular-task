@@ -1,9 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Ingredient } from '../../models/ingredient.model';
 import { Recipe } from '../../models/recipe.model';
-import { RecipeService } from '../../services/recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -11,18 +8,21 @@ import { RecipeService } from '../../services/recipe.service';
   styleUrls: ['./recipe-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RecipeListComponent implements OnChanges {
+export class RecipeListComponent {
 
   @Input() recipeList: Recipe[] = [];
 
-  constructor(private recipeService: RecipeService, private router: Router) { }
+  @Output() refreshMaintainer = new EventEmitter();
 
-  ngOnChanges(data: any): void {
-    console.log(data)
-  }
+  constructor(private router: Router) { }
 
   navigateToCreate() {
     this.router.navigate(["/create"])
+  }
+
+  getRidOfDeletedElement(id: string) {
+
+    this.recipeList = this.recipeList.filter(el => el._id !== id)
   }
 
 }

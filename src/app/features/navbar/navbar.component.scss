@@ -2,7 +2,6 @@
 
 .navbar {
     background-color: $primary;
-    color: white;
     height: $headerHeight;
     display: flex;
     justify-content: space-between;
@@ -12,6 +11,11 @@
     h2 {
         margin: 0;
         font-weight: 400;
+        
+    }
+    a {
+        text-decoration: none;
+        color: white;   
     }
 }
 
