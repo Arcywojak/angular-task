@@ -1,3 +1,5 @@
+# Przed uruchomeniem projektu pamiętaj, aby [TUTAJ](https://github.com/Arcywojak/angular-task/blob/master/src/app/features/recipes-maintainer/constants/recipe-api.constants.ts) wstawić swój klucz do API, ponieważ ten na repozytorium jest już prawdopodobnie nieważny
+
 # RecipeManager
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.3.
