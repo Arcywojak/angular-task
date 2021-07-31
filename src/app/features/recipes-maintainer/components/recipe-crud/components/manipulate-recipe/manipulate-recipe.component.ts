@@ -48,7 +48,7 @@ export class ManipulateRecipeComponent implements OnChanges, OnInit {
 
   ngOnInit() {
     this.recipeForm.valueChanges.subscribe(form => {
-        this.isRecipeFormTouchedEmitter.emit(this.recipeForm.dirty && this.ingredientsFormControl.value.length === 0);
+        this.isRecipeFormTouchedEmitter.emit(this.recipeForm.dirty || this.ingredientsFormControl.value.length === 0);
     })
   }
 
