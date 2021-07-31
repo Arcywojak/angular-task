@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
   templateUrl: './filter-data-form.component.html',
   styleUrls: ['./filter-data-form.component.scss']
 })
-export class FilterDataFormComponent implements OnInit {
+export class FilterDataFormComponent implements OnInit, OnChanges {
 
   @Input() data: unknown[] = [];
   @Input() dataName = "";
@@ -22,6 +22,10 @@ export class FilterDataFormComponent implements OnInit {
     this.filterDataFormControl.valueChanges.subscribe(value => {
       this.filter()
     })
+  }
+
+  ngOnChanges() {
+    this.filter();
   }
 
   filter() {

@@ -11,7 +11,7 @@ export class RefreshService {
 
     readonly refreshPointer$ = this._refreshPointer.asObservable();
 
-    emit(flag: boolean) {
+    callForRefresh(flag: boolean) {
         this._refreshPointer.next(flag);
     }
 

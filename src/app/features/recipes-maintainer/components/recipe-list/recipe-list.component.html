@@ -6,7 +6,7 @@
     </div>
 
     <ng-container *ngIf="recipeList.length > 0">
-        <app-recipe-list-item *ngFor="let recipe of recipeList" [recipe]="recipe" (refreshList)="getRidOfDeletedElement($event)">
+        <app-recipe-list-item *ngFor="let recipe of recipeList" [recipe]="recipe">
         
         </app-recipe-list-item>
     </ng-container>

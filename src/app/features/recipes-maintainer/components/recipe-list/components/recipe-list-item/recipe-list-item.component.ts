@@ -7,6 +7,7 @@ import { switchMap } from 'rxjs/operators'
 import { RecipeService } from 'src/app/features/recipes-maintainer/services/recipe.service';
 import { EMPTY } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { RefreshService } from 'src/app/features/recipes-maintainer/services/refresh.service';
 
 @Component({
   selector: 'app-recipe-list-item',
@@ -17,14 +18,12 @@ export class RecipeListItemComponent {
 
   @Input() recipe: Recipe | null = null;
 
-  @Output() refreshList = new EventEmitter<string>();
-
-
   constructor(
     private router: Router,
     public dialog: MatDialog, 
     private recipeService: RecipeService, 
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private refreshService: RefreshService) { }
 
   navigateTo(event: MouseEvent, routeParam: string) {
     //by adding stop propagation we contain element from routing to view (If we want to route to edit)
@@ -54,20 +53,13 @@ export class RecipeListItemComponent {
         return EMPTY;
       })
     ).subscribe(res => {
-      this.snackBar.open("Recipe deleted", "SUCCESS", {duration: 2000})
-      this.refreshParent(this.recipe?._id || "");
+      this.snackBar.open("Recipe deleted", "SUCCESS", {duration: 2000});
+      this.refreshService.callForRefresh(true);
 
     }, err => {
-      this.snackBar.open("Something went wrong!", "UPS", {duration: 2000})
+      this.snackBar.open("Something went wrong!", "UPS", {duration: 2000});
     })
 
   }
-
-  refreshParent(deletedItemId: string) {
-    console.log("list-item refreshed")
-    this.refreshList.emit(deletedItemId);
-  }
-  
-
 
 }

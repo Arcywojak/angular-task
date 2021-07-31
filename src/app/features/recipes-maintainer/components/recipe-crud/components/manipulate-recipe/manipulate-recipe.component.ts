@@ -9,6 +9,7 @@ import { switchMap } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { RecipeService } from 'src/app/features/recipes-maintainer/services/recipe.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { RefreshService } from 'src/app/features/recipes-maintainer/services/refresh.service';
 
 @Component({
   selector: 'app-manipulate-recipe',
@@ -38,10 +39,10 @@ export class ManipulateRecipeComponent implements OnChanges {
 
   constructor(private dialog: MatDialog, 
     private recipeService: RecipeService, 
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private refreshService: RefreshService) { }
 
   ngOnChanges() {
-    console.log("UPDATED")
     if(this.fillFormType === ManipulateRecipeFormType.EDIT && this.recipe != null) {
       this.setValuesForRecipeForm(this.recipe);
     }
@@ -107,6 +108,16 @@ export class ManipulateRecipeComponent implements OnChanges {
     this.recipeService.create(recipe).subscribe(res => { 
       this.snackBar.open("Recipe has been created", "SUCCESS", {duration:2000});
       this.resetFormValues();
+      this.refreshService.callForRefresh(true);
+    }, err => {
+      this.snackBar.open("Something went wrong!", "UPS", {duration:2000})
+    })
+  }
+
+  updateRecipe(recipe: Recipe) {
+    this.recipeService.update(recipe, this.recipe?._id || "").subscribe(res => {
+      this.snackBar.open("Recipe has been updated", "SUCCESS", {duration:2000})
+      this.refreshService.callForRefresh(true);
     }, err => {
       this.snackBar.open("Something went wrong!", "UPS", {duration:2000})
     })
@@ -115,14 +126,6 @@ export class ManipulateRecipeComponent implements OnChanges {
   resetFormValues() {
     this.recipeForm.reset();
     this.ingredientsFormControl.setValue([]);
-  }
-
-  updateRecipe(recipe: Recipe) {
-    this.recipeService.update(recipe, this.recipe?._id || "").subscribe(res => {
-      this.snackBar.open("Recipe has been updated", "SUCCESS", {duration:2000})
-    }, err => {
-      this.snackBar.open("Something went wrong!", "UPS", {duration:2000})
-    })
   }
 
   loadNewIngredients($event: Ingredient[]) {
