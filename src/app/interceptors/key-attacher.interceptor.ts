@@ -13,6 +13,9 @@ export class KeyAttacherInterceptor implements HttpInterceptor {
   constructor() {}  
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    /* Attaching key doesnt work because the API does not allow to modify headers (I havent found anything to change it) */
+
+
   //  const clone = request.clone({
   //    headers: request.headers.set("X-API-KEY", "HoA")
   //  })

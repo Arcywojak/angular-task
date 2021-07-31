@@ -19,7 +19,6 @@ export class BaseCrudService<T> {
     }
 
     update(body: T, id: string): Observable<T> {
-        console.log(body, id)
         return this.http.put<T>(`${this.url}/${id}`, body);
     }
 

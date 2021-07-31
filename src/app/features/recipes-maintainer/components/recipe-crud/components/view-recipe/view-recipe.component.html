@@ -24,7 +24,7 @@
         </p>
     </div>
     <div class="buttons">
-        <button  mat-raised-button color="primary">
+        <button  mat-raised-button color="primary" (click)="routeToEdit()">
                 Edit
         </button>
         <app-delete-recipe-button [recipe]="recipe || null"></app-delete-recipe-button>

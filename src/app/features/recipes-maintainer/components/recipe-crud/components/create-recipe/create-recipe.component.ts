@@ -20,7 +20,6 @@ export class CreateRecipeComponent {
   constructor() { }
 
   setIsFormTouched(data: boolean) {
-    console.log("IS TOUECHED?", data)
     this.dirtyForm = data;
   }
 

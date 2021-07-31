@@ -33,7 +33,13 @@ export class ViewRecipeComponent {
     ).subscribe(res => {
       this.recipe = res;
       this.changeDetectorRef.detectChanges();
+    }, err => {
+      this.router.navigate(["/"])
     })
+  }
+
+  routeToEdit() {
+    this.router.navigate(["/edit", this.recipe?._id || ""])
   }
 
 }

@@ -5,7 +5,7 @@ import { NavbarComponent } from './features/navbar/navbar.component';
 import { RecipesMaintainerComponent } from './features/recipes-maintainer/recipes-maintainer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthorInfoDialogComponent } from './features/navbar/author-info-dialog/author-info-dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import { RecipesMaintainerModule } from './features/recipes-maintainer/recipes-maintainer.module';
 import { MatButtonModule } from '@angular/material/button';
@@ -30,11 +30,11 @@ import { PendingChangesGuard } from './guards/pending-changes.guard';
     MatButtonModule,
     RecipesMaintainerModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule, 
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: KeyAttacherInterceptor, multi: true },
-    PendingChangesGuard
+    PendingChangesGuard,
   ],
   bootstrap: [AppComponent],
   entryComponents: [

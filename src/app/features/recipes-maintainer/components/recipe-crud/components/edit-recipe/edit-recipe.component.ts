@@ -16,7 +16,6 @@ export class EditRecipeComponent implements OnInit {
 
   @HostListener('window:beforeunload')
   canDeactivate(): Observable<boolean> | boolean {
-    console.log(this.touchedForm)
     return !this.touchedForm;
   }
 
@@ -48,7 +47,6 @@ export class EditRecipeComponent implements OnInit {
   }
 
   setIsFormTouched(data: boolean) {
-    console.log("IS TOUECHED?", data)
     this.touchedForm = data;
   }
 }

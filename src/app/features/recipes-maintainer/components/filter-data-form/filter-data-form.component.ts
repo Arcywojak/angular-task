@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-filter-data-form',
   templateUrl: './filter-data-form.component.html',
-  styleUrls: ['./filter-data-form.component.scss']
+  styleUrls: ['./filter-data-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FilterDataFormComponent implements OnInit, OnChanges {
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -13,9 +13,9 @@ import { ConfirmActionDialogComponent } from '../../confirm-action-dialog/confir
   selector: 'app-delete-recipe-button',
   templateUrl: './delete-recipe-button.component.html',
   styleUrls: ['./delete-recipe-button.component.scss'],
-  
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DeleteRecipeButtonComponent implements OnInit {
+export class DeleteRecipeButtonComponent {
   @Input() recipe: Recipe | null = null;
 
   constructor(
@@ -25,9 +25,6 @@ export class DeleteRecipeButtonComponent implements OnInit {
     private refreshService: RefreshService,
     private router: Router,
     ) { }
-
-  ngOnInit(): void {
-  }
 
   openDeleteDialog(event: MouseEvent) {
     //by adding stop propagation we contain element from routing to view (If we want to delete item)

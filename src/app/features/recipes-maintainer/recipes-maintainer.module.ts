@@ -21,6 +21,8 @@ import { IngredientFormComponent } from './components/recipe-crud/components/man
 import { TimeFromMinutesPipe } from './pipes/time-from-minutes.pipe';
 import { FilterDataFormComponent } from './components/filter-data-form/filter-data-form.component';
 import { DeleteRecipeButtonComponent } from './components/shared/delete-recipe-button/delete-recipe-button.component';
+import { ActivatedRoute } from '@angular/router';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 
 
@@ -56,6 +58,7 @@ import { DeleteRecipeButtonComponent } from './components/shared/delete-recipe-b
     RecipeListComponent,
     RecipeCrudComponent,
     FilterDataFormComponent
-  ]
+  ],
+
 })
 export class RecipesMaintainerModule { }

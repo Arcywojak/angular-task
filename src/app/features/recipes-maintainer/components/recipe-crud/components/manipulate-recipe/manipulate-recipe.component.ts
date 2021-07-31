@@ -4,9 +4,6 @@ import { ManipulateRecipeFormType } from 'src/app/features/recipes-maintainer/en
 import { Ingredient } from 'src/app/features/recipes-maintainer/models/ingredient.model';
 import { Recipe } from 'src/app/features/recipes-maintainer/models/recipe.model';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmActionDialogComponent } from '../../../confirm-action-dialog/confirm-action-dialog.component';
-import { switchMap } from 'rxjs/operators';
-import { EMPTY } from 'rxjs';
 import { RecipeService } from 'src/app/features/recipes-maintainer/services/recipe.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RefreshService } from 'src/app/features/recipes-maintainer/services/refresh.service';
@@ -20,7 +17,7 @@ import { Router } from '@angular/router';
 })
 
 
-export class ManipulateRecipeComponent implements OnChanges {
+export class ManipulateRecipeComponent implements OnChanges, OnInit {
 
   @Input() fillFormType: ManipulateRecipeFormType = ManipulateRecipeFormType.CREATE;
   @Input() recipe ?: Recipe;
@@ -44,8 +41,7 @@ export class ManipulateRecipeComponent implements OnChanges {
   constructor(private dialog: MatDialog, 
     private recipeService: RecipeService, 
     private snackBar: MatSnackBar,
-    private refreshService: RefreshService,
-    private router: Router) { }
+    private refreshService: RefreshService) { }
 
   ngOnChanges() {
     if(this.fillFormType === ManipulateRecipeFormType.EDIT && this.recipe != null) {
@@ -141,38 +137,6 @@ export class ManipulateRecipeComponent implements OnChanges {
 
   loadNewIngredients($event: Ingredient[]) {
     this.ingredientsFormControl.setValue($event);
-  }
-
-  sendNewDataToParent() {
-    return this.recipeService.readAll()
-  }
-
-  openDeleteDialog() {
-    const message = `Are you sure to delete recipe named ${this.recipe?.name}?`
-
-    const dialogRef = this.dialog.open(ConfirmActionDialogComponent, {
-      data: {
-        message
-      },
-      autoFocus: false
-    })
-    
-    dialogRef.afterClosed().pipe(
-      switchMap(shouldActionBeExecuted => {
-        if(shouldActionBeExecuted) {
-          return this.recipeService.delete(this.recipe?._id || "");
-        }
-
-        return EMPTY;
-      })
-    ).subscribe(res => {
-      this.snackBar.open("Recipe deleted", "SUCCESS", {duration: 2000});
-      this.refreshService.callForRefresh(true);
-      this.router.navigate(["/"]);
-    }, err => {
-      this.snackBar.open("Something went wrong!", "UPS", {duration: 2000});
-    })
-
   }
 
 }
