@@ -13,6 +13,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { KeyAttacherInterceptor } from './interceptors/key-attacher.interceptor';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
+import { PendingChangesGuard } from './guards/pending-changes.guard';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AppRoutingModule } from './app.routing';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: KeyAttacherInterceptor, multi: true },
+    PendingChangesGuard
   ],
   bootstrap: [AppComponent],
   entryComponents: [

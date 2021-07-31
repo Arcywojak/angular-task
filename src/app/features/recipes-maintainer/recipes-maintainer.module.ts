@@ -20,6 +20,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { IngredientFormComponent } from './components/recipe-crud/components/manipulate-recipe/components/ingredient-form/ingredient-form.component';
 import { TimeFromMinutesPipe } from './pipes/time-from-minutes.pipe';
 import { FilterDataFormComponent } from './components/filter-data-form/filter-data-form.component';
+import { DeleteRecipeButtonComponent } from './components/shared/delete-recipe-button/delete-recipe-button.component';
 
 
 
@@ -36,7 +37,8 @@ import { FilterDataFormComponent } from './components/filter-data-form/filter-da
     ManipulateRecipeComponent,
     IngredientFormComponent,
     TimeFromMinutesPipe,
-    FilterDataFormComponent
+    FilterDataFormComponent,
+    DeleteRecipeButtonComponent
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
 <div class="edit-recipe">
-    <app-manipulate-recipe [fillFormType]="0" [recipe]="recipe">
+    <app-manipulate-recipe [fillFormType]="0" [recipe]="recipe" (isRecipeFormTouchedEmitter)="setIsFormTouched($event)">
 
     </app-manipulate-recipe>
 </div>

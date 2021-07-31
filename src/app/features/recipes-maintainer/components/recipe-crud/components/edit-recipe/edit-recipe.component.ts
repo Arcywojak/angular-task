@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, OnInit, ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Recipe } from 'src/app/features/recipes-maintainer/models/recipe.model';
 import { RecipeService } from 'src/app/features/recipes-maintainer/services/recipe.service';
+import { HostListener } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-recipe',
@@ -10,21 +12,27 @@ import { RecipeService } from 'src/app/features/recipes-maintainer/services/reci
   styleUrls: ['./edit-recipe.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditRecipeComponent {
+export class EditRecipeComponent implements OnInit {
+
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    console.log(this.touchedForm)
+    return !this.touchedForm;
+  }
 
   recipe: Recipe | undefined;
+  touchedForm = false;
 
   constructor(
     private route: ActivatedRoute, 
     private router: Router, 
     private recipeSerivce: RecipeService,
-    private changeDetectorRef: ChangeDetectorRef) {
-    const recipe = this.router.getCurrentNavigation()?.extras?.state?.recipe
-    if(recipe) {
-      this.recipe = recipe;
-      return;
-    }
+  private changeDetectorRef: ChangeDetectorRef) {
+    //Here we could something like its done in 'view'
+    //But then would be a problem with switching between different editing
+  }
 
+  ngOnInit() {
     this.route.params.pipe(
       switchMap(params => {
         const {id} = params;
@@ -37,5 +45,10 @@ export class EditRecipeComponent {
       //we didnt find the recipe, so the most probably it doesnt exist
       this.router.navigate(["/"])
     })
+  }
+
+  setIsFormTouched(data: boolean) {
+    console.log("IS TOUECHED?", data)
+    this.touchedForm = data;
   }
 }

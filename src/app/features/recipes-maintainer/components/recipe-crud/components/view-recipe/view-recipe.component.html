@@ -23,4 +23,10 @@
             </i>
         </p>
     </div>
+    <div class="buttons">
+        <button  mat-raised-button color="primary">
+                Edit
+        </button>
+        <app-delete-recipe-button [recipe]="recipe || null"></app-delete-recipe-button>
+    </div>
 </div>

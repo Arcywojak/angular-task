@@ -45,8 +45,8 @@
                 Create
             </ng-container>
         </button>
-        <button *ngIf="fillFormType === 0" (click)="openDeleteDialog()" type="button" mat-raised-button color="warn">
-            delete
-        </button>
+        <ng-container *ngIf="fillFormType === 0">
+            <app-delete-recipe-button [recipe]="recipe || null"></app-delete-recipe-button>
+        </ng-container>
     </div>
 </form>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, OnChanges, OnInit, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ManipulateRecipeFormType } from 'src/app/features/recipes-maintainer/enums/manipulate-recipe-form-type.enum';
 import { Ingredient } from 'src/app/features/recipes-maintainer/models/ingredient.model';
@@ -10,6 +10,7 @@ import { EMPTY } from 'rxjs';
 import { RecipeService } from 'src/app/features/recipes-maintainer/services/recipe.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RefreshService } from 'src/app/features/recipes-maintainer/services/refresh.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manipulate-recipe',
@@ -23,6 +24,9 @@ export class ManipulateRecipeComponent implements OnChanges {
 
   @Input() fillFormType: ManipulateRecipeFormType = ManipulateRecipeFormType.CREATE;
   @Input() recipe ?: Recipe;
+
+  @Output() isRecipeFormTouchedEmitter = new EventEmitter<boolean>();
+  touchedForm = false;
 
   nameFormControl = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]);
   preparationInMinutesFormControl = new FormControl(10, [Validators.required, Validators.min(1)]);
@@ -40,12 +44,19 @@ export class ManipulateRecipeComponent implements OnChanges {
   constructor(private dialog: MatDialog, 
     private recipeService: RecipeService, 
     private snackBar: MatSnackBar,
-    private refreshService: RefreshService) { }
+    private refreshService: RefreshService,
+    private router: Router) { }
 
   ngOnChanges() {
     if(this.fillFormType === ManipulateRecipeFormType.EDIT && this.recipe != null) {
       this.setValuesForRecipeForm(this.recipe);
     }
+  }
+
+  ngOnInit() {
+    this.recipeForm.valueChanges.subscribe(form => {
+        this.isRecipeFormTouchedEmitter.emit(this.recipeForm.dirty && this.ingredientsFormControl.value.length === 0);
+    })
   }
 
   private setValuesForRecipeForm(recipe: Recipe) {
@@ -155,9 +166,11 @@ export class ManipulateRecipeComponent implements OnChanges {
         return EMPTY;
       })
     ).subscribe(res => {
-      this.snackBar.open("Recipe deleted", "SUCCESS", {duration: 2000})
+      this.snackBar.open("Recipe deleted", "SUCCESS", {duration: 2000});
+      this.refreshService.callForRefresh(true);
+      this.router.navigate(["/"]);
     }, err => {
-      this.snackBar.open("Something went wrong!", "UPS", {duration: 2000})
+      this.snackBar.open("Something went wrong!", "UPS", {duration: 2000});
     })
 
   }

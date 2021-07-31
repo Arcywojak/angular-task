@@ -29,8 +29,6 @@ export class FilterDataFormComponent implements OnInit, OnChanges {
   }
 
   filter() {
-    console.log("I filter", this.filterProperty)
-
     if(!Array.isArray(this.data)) {
       return;
     }

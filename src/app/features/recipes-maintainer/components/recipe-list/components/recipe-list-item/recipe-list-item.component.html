@@ -7,8 +7,6 @@
         <button (click)="navigateTo($event, 'edit')" mat-raised-button color="primary">
             Edit
         </button>
-        <button mat-raised-button color="accent" (click)="openDeleteDialog($event)">
-            delete
-        </button>
+        <app-delete-recipe-button [recipe]="recipe"></app-delete-recipe-button>
     </div>
 </mat-card>
