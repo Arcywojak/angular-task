@@ -27,8 +27,7 @@ export class EditRecipeComponent implements OnInit {
     private router: Router, 
     private recipeSerivce: RecipeService,
   private changeDetectorRef: ChangeDetectorRef) {
-    //Here we could something like its done in 'view'
-    //But then would be a problem with switching between different editing
+
   }
 
   ngOnInit() {

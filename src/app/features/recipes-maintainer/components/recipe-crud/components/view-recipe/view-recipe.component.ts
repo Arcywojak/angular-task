@@ -17,29 +17,27 @@ export class ViewRecipeComponent {
   constructor(private route: ActivatedRoute, 
     private router: Router,
     private recipeSerivce: RecipeService,
-    private changeDetectorRef: ChangeDetectorRef) { 
+    private changeDetectorRef: ChangeDetectorRef) { }
 
-    const recipe = this.router.getCurrentNavigation()?.extras?.state?.recipe;
-    if(recipe) {
-      this.recipe = recipe;
-      return;
-    }
 
+
+  routeToEdit() {
+    this.router.navigate(["/edit", this.recipe?._id || ""])
+  }
+
+  ngOnInit() {
     this.route.params.pipe(
       switchMap(params => {
         const {id} = params;
-        return this.recipeSerivce.readOne(id);
+      return this.recipeSerivce.readOne(id);
       })
     ).subscribe(res => {
       this.recipe = res;
       this.changeDetectorRef.detectChanges();
     }, err => {
+      //we didnt find the recipe, so the most probably it doesnt exist
       this.router.navigate(["/"])
     })
-  }
-
-  routeToEdit() {
-    this.router.navigate(["/edit", this.recipe?._id || ""])
   }
 
 }

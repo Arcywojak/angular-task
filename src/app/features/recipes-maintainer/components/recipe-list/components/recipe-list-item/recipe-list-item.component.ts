@@ -19,7 +19,7 @@ export class RecipeListItemComponent {
   navigateTo(event: MouseEvent, routeParam: string) {
     //by adding stop propagation we contain element from routing to view (If we want to route to edit)
     event.stopPropagation();
-    this.router.navigate([`/${routeParam}`, this.recipe?._id], {state: {recipe: this.recipe}});
+    this.router.navigate([`/${routeParam}`, this.recipe?._id]);
   }
 
 }
