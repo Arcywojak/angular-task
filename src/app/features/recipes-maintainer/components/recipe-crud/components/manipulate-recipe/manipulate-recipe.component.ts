@@ -7,7 +7,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { RecipeService } from 'src/app/features/recipes-maintainer/services/recipe.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RefreshService } from 'src/app/features/recipes-maintainer/services/refresh.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manipulate-recipe',
@@ -38,8 +37,7 @@ export class ManipulateRecipeComponent implements OnChanges, OnInit {
     ingredients: this.ingredientsFormControl
   })
 
-  constructor(private dialog: MatDialog, 
-    private recipeService: RecipeService, 
+  constructor(private recipeService: RecipeService, 
     private snackBar: MatSnackBar,
     private refreshService: RefreshService) { }
 
